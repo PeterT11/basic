@@ -1,0 +1,23 @@
+# the name for the service (will be part of the service's HTTP endpoint)
+service: graphql-boilerplate
+
+# the cluster and stage the service is deployed to
+stage: dev
+
+# to disable authentication:
+# disableAuth: true
+secret: mysecret123
+
+# the file path pointing to your data model
+datamodel: datamodel.graphql
+
+# seed your service with initial data based on seed.graphql
+seed:
+  import: seed.graphql
+
+cluster: public-bolddart-24/prisma-eu1
+
+  # HTTP:  https://eu1.prisma.sh/public-bolddart-24/graphql-boilerplate/dev
+  # WS:    wss://eu1.prisma.sh/public-bolddart-24/graphql-boilerplate/dev
+
+  # "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJncmFwaHFsLWJvaWxlcnBsYXRlQGRldiIsInJvbGVzIjpbImFkbWluIl19LCJpYXQiOjE1MjQyMDQ0MTQsImV4cCI6MTUyNDgwOTIxNH0.yIF7-5G3-LHiqmBeRzHLbM-nW7k9y_W7jzt1yznY78A"
