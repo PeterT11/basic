@@ -19,7 +19,7 @@ const resolvers = {
       return ctx.db.mutation.createPost(
         {
           data: {
-   //         isPublished:false,
+            isPublished:false,
             title,
             text,
           },

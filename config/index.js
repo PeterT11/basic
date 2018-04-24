@@ -10,7 +10,10 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      "/graphql" : "http://localhost:8000",
+      "/playground" : "http://localhost:8000"
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

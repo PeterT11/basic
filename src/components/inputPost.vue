@@ -4,7 +4,7 @@
   <div>
     <textarea rows="4" cols="50" v-model="text" placeholder="Please input text"></textarea>
   </div>      
-  <button @click="$emit('submit',{title,text})">Submit</button>  
+  <button @click="$emit('submit-post',{title,text})">Submit</button>  
   </div>
 </template>
 
@@ -12,10 +12,11 @@
 <script>
 console.log("good");
 export default {
+//  props:{title:'god',text:'dd'},
   name: 'PostWrite',
   data:function(){
-    return {title,text};
-  }
+    return {title:'godddd',text:'pig'};
+  } 
 }
 
 </script>
