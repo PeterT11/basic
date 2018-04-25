@@ -7,7 +7,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/Write',
+      path: '/writePost',
       name: 'writePost',
       component: writePost
     }

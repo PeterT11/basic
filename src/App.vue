@@ -23,7 +23,7 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-                 <router-link to = '/Write'>
+                 <router-link :to = "item.path">
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>
         </router-link>
         </v-list-tile-content>
@@ -45,10 +45,10 @@ export default {
     return {
       //     drawer: true,
       items: [
-        { title: "Home", icon: "dashboard" },
-        { title: "Posts", icon: "description" },
-        { title: "Write a Post", icon: "add" },
-        { title: "About", icon: "question_answer" }
+        { title: "Home", path:"home",icon: "dashboard" },
+        { title: "Posts", path:"posts",icon: "description" },
+        { title: "Write a Post", path:"writePost",icon: "add" },
+        { title: "About", path:"about",icon: "question_answer" }
       ],
       right: null
     };
