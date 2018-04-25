@@ -1,18 +1,9 @@
 <!-- Include the library in the page -->
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/apollo-client-browser@1.9.0"></script>
-<script src="https://unpkg.com/vue-apollo@2.1.0-beta.19"></script>
-
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+</head>
 
 <!-- App -->
 <div id="app">
-  <h1>Blog</h1>
-  <div>
-    <div v-if="loading" class="loading">Loading...</div>
-    <article v-for="post of feed">
-      <h3 class="title">{{ post.title }}</h3>
-      <div class="text"> {{ post.text }}</div>
-    </article>
-  </div>
 </div>
 

@@ -1,50 +1,117 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <div>Write your Post!</div>
-    <postWrite v-on:submit-post='summitPost'></postWrite>
+  <div id="app">    
+    <v-app>
+      <v-layout row>
+        <v-navigation-drawer permanent>
+    <v-toolbar flat>
+      <v-list>
+        <v-list-tile>
+          <v-list-tile-avatar>
+            <img src="./assets/logo.png" >
+          </v-list-tile-avatar>
+          <v-list-tile-title class="title">
+            Web Posts
+          </v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-toolbar>
+    <v-divider></v-divider>
+    <v-list dense class="pt-0">
+      <v-list-tile v-for="item in items" :key="item.title" @click="">
+
+        <v-list-tile-action>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+                 <router-link to = '/Write'>
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </router-link>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
+  </v-navigation-drawer>
+      <v-flex>
+  <router-view></router-view>
+      </v-flex>
+      </v-layout>
+    </v-app>
   </div>
 </template>
 
 <script>
-import postWrite from './components/inputPost'
-import ApolloClient from 'apollo-boost';
-console.log(ApolloClient);
+import ApolloClient from "apollo-boost";
+//import router from './router'
+
 const client = new ApolloClient({
-  uri: '/graphql'
+  uri: "/graphql"
 });
-console.log(client)
-import gql from 'graphql-tag'
+console.log(client);
+import gql from "graphql-tag";
 
 export default {
-  name: 'App',
-  methods:{
-    summitPost: function(data){
-      console.log(data);
-      client.mutate({
-        mutation: gql`mutation($title:String!,$text:String!){createDraft(title:$title,text:$text){
-              id
-            }}`,
-        variables: {
-          title:data.title,
-          text:data.text
-        }
-      }).then((data)=>console.log(data));
-    }
+  name: "App",
+  data() {
+    return {
+      //     drawer: true,
+      items: [
+        { title: "Home", icon: "dashboard" },
+        { title: "Posts", icon: "description" },
+        { title: "Write a Post", icon: "add" },
+        { title: "About", icon: "question_answer" }
+      ],
+      right: null
+    };
   },
-  components: {
-    postWrite
+  methods: {
+    selectRoute: function(item) {
+      switch (item) {
+        case "Home":
+          console.log("here:home");
+          break;
+        case "Posts":
+          console.log("here:Posts");
+          break;
+        case "Write Post":
+          //        router.push({ path: '/Write' });
+          console.log("here:Write");
+          break;
+        case "About":
+          console.log("here:About");
+          break;
+        default:
+          console.log("here:default");
+      }
+    },
+    summitPost: function(data) {
+      console.log(data);
+      client
+        .mutate({
+          mutation: gql`
+            mutation($title: String!, $text: String!) {
+              createDraft(title: $title, text: $text) {
+                id
+              }
+            }
+          `,
+          variables: {
+            title: data.title,
+            text: data.text
+          }
+        })
+        .then(data => console.log(data));
+    }
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #910c43;
+  width: 80%;
+  margin: 60px auto;
 }
 </style>

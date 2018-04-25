@@ -1,21 +1,44 @@
 <template>
-  <div class="Write a Post">
-  <div><input v-model="title" placeholder="Please input title"></div>
   <div>
-    <textarea rows="4" cols="50" v-model="text" placeholder="Please input text"></textarea>
-  </div>      
-  <button @click="$emit('submit-post',{title,text})">Submit</button>  
+    <v-card color="grey lighten-4" flat>
+      <v-card-text>
+        <v-subheader>Write a Post</v-subheader>
+        <v-container fluid>
+          <v-layout row>
+            <v-flex xs12>
+              <v-text-field
+                v-model="title"
+                name="title"
+                label="Title"                              
+              ></v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12>
+              <v-text-field
+                v-model="text"
+                name="text"
+                label="Text"
+                textarea                
+              ></v-text-field>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card-text>
+      <v-btn @click="$emit('submit-post',{title,text})">Submit</v-btn>
+    </v-card>
+
   </div>
+
 </template>
 
 
 <script>
 console.log("good");
 export default {
-//  props:{title:'god',text:'dd'},
-  name: 'PostWrite',
+  name: 'writePost',
   data:function(){
-    return {title:'godddd',text:'pig'};
+    return {title:'',text:''};
   } 
 }
 
