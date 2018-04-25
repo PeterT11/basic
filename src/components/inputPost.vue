@@ -2,7 +2,7 @@
   <div>
     <v-card color="grey lighten-4" flat>
       <v-card-text>
-        <v-subheader>Write a Post</v-subheader>
+        <v-subheader>Write a Post: {{title}}</v-subheader>
         <v-container fluid>
           <v-layout row>
             <v-flex xs12>
@@ -25,7 +25,7 @@
           </v-layout>
         </v-container>
       </v-card-text>
-      <v-btn @click="$emit('submit-post',{title,text})">Submit</v-btn>
+      <v-btn @click="submitPost">Submit</v-btn>
     </v-card>
 
   </div>
@@ -34,12 +34,41 @@
 
 
 <script>
-console.log("good");
+import ApolloClient from "apollo-boost";
+import gql from "graphql-tag";
+//import router from './router'
+
+const client = new ApolloClient({
+  uri: "/graphql"
+});
+
 export default {
   name: 'writePost',
   data:function(){
-    return {title:'',text:''};
-  } 
+    return {title:'abcd',text:'def'};
+  }, 
+  created(){
+    console.log('cr11111eated:',this.title);
+  },
+  methods:{
+    submitPost(){ 
+      console.log('strange',this);        
+      client.mutate({
+          mutation: gql`
+            mutation($title: String!, $text: String!) {
+              createDraft(title: $title, text: $text) {
+                id
+              }
+            }
+          `,
+          variables: {
+            title: this.title,
+            text: this.text
+          }
+        })
+        .then(data => console.log(data));
+    }
+  }
 }
 
 </script>

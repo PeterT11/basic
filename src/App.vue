@@ -39,15 +39,6 @@
 </template>
 
 <script>
-import ApolloClient from "apollo-boost";
-//import router from './router'
-
-const client = new ApolloClient({
-  uri: "/graphql"
-});
-console.log(client);
-import gql from "graphql-tag";
-
 export default {
   name: "App",
   data() {
@@ -82,24 +73,6 @@ export default {
           console.log("here:default");
       }
     },
-    summitPost: function(data) {
-      console.log(data);
-      client
-        .mutate({
-          mutation: gql`
-            mutation($title: String!, $text: String!) {
-              createDraft(title: $title, text: $text) {
-                id
-              }
-            }
-          `,
-          variables: {
-            title: data.title,
-            text: data.text
-          }
-        })
-        .then(data => console.log(data));
-    }
   }
 };
 </script>
